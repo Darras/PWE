@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Lista de contatos</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    </head>
+    <body>
+
+
+        <br>
+
+        <div class="container"> 
+
+            <h2> Controle de Livros </h2>
+
+            <hr>
+
+            <form action="controller" method="post" role="form">
+                <input type="hidden" name="tarefa" value="Login">
+                <input type="hidden" name="metodo" value="executa">
+                <!-- tarefa=Login&metodo=Executar-->
+                <legend>Login</legend>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" name="email" id="email" placeholder="Email...">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="senha">Senha</label>
+                    <input type="password" class="form-control" name="senha" id="senha" placeholder="Senha...">
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Login!</button>
+                </div>
+                <br>
+                <br>
+            </form>
+            
+            <form action="controller" method="post" role="form">
+                <input type="hidden" name="tarefa" value="CriarUsuario">
+                <input type="hidden" name="metodo" value="redirect">
+                
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Criar Usuario</button>                    
+                </div>
+            </form>
+        </div>
+
+    </body>
+</html>
