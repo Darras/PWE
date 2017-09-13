@@ -1,49 +1,254 @@
-<%@page import="br.com.JavaBeans.Usuario"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-        <title>Lista de Contatos</title>
-    </head>
-    <body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <br>
-        <div class="container">
+    <title>Bootstrap 3, from LayoutIt!</title>
 
-            <p> Cadastro de livros </p>
-            <p>Bem Vindo <% colocar usuario aqui %></p>
-            <form action="controller" method="POST">
-                <input type="hidden" name="tarefa" value="NovoLivro">
-                <input type="hidden" name="metodo" value="executa">
-                Titulo: <input type="text" name="nome"/>
-                Autor: <input type="text" name="autor"/>
-                Genero: <input type="text" name="genero"/>
-                Status de Leitura <select type="text" name="">
-                    <option type="text" name="status_leitura" value="Leitura não Iniciada"/>leitura
-                    <option type="text" name="status_leitura" value="Em leitura"/>em leitura
-                    <option type="text" name="status_leitura" value="Lido"/>lido
-                </select>
+    <meta name="description" content="Source code generated using layoutit.com">
+    <meta name="author" content="LayoutIt!">
 
-                <input type="submit" name="salvar" value="salvar"/>
-            </form>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
-            <br>
-            
-            <form action="controller" method="GET">
-                <input type="hidden" name="tarefa" value="BuscaUsuario">
-                <input type="hidden" name="metodo" value="executa">
-                Buscar Usuario: <input type="text" name="filtro">
-                <input type="submit" value="buscar contato!">
-            </form>
-            <br>
-            <c:forEach var="livros" items="${livro}">
-                ${livro.titulo}
-                ${livro.autor}
-                ${livro.genero}
-            </c:forEach>
-        </div>
-    </body>
-    </html>
+  </head>
+  <body>
+
+    <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<h3 class="text-info">
+				h3. Lorem ipsum dolor sit amet.
+			</h3>
+			<form role="form" class="form-inline">
+				<div class="form-group">
+					 
+					<label for="exampleInputEmail1">
+						Email address
+					</label>
+					<input type="email" class="form-control" id="exampleInputEmail1">
+				</div>
+				<div class="form-group">
+					 
+					<label for="exampleInputPassword1">
+						Password
+					</label>
+					<input type="password" class="form-control" id="exampleInputPassword1">
+				</div>
+				<div class="form-group">
+					 
+					<label for="exampleInputFile">
+						File input
+					</label>
+					<input type="file" id="exampleInputFile">
+					<p class="help-block">
+						Example block-level help text here.
+					</p>
+				</div>
+				<div class="checkbox">
+					 
+					<label>
+						<input type="checkbox"> Check me out
+					</label>
+				</div> 
+				<button type="submit" class="btn btn-default">
+					Submit
+				</button>
+			</form> <span class="label label-info">Label</span>
+			<div class="row">
+				<div class="col-md-6">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>
+									#
+								</th>
+								<th>
+									Product
+								</th>
+								<th>
+									Payment Taken
+								</th>
+								<th>
+									Status
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									1
+								</td>
+								<td>
+									TB - Monthly
+								</td>
+								<td>
+									01/04/2012
+								</td>
+								<td>
+									Default
+								</td>
+							</tr>
+							<tr class="active">
+								<td>
+									1
+								</td>
+								<td>
+									TB - Monthly
+								</td>
+								<td>
+									01/04/2012
+								</td>
+								<td>
+									Approved
+								</td>
+							</tr>
+							<tr class="success">
+								<td>
+									2
+								</td>
+								<td>
+									TB - Monthly
+								</td>
+								<td>
+									02/04/2012
+								</td>
+								<td>
+									Declined
+								</td>
+							</tr>
+							<tr class="warning">
+								<td>
+									3
+								</td>
+								<td>
+									TB - Monthly
+								</td>
+								<td>
+									03/04/2012
+								</td>
+								<td>
+									Pending
+								</td>
+							</tr>
+							<tr class="danger">
+								<td>
+									4
+								</td>
+								<td>
+									TB - Monthly
+								</td>
+								<td>
+									04/04/2012
+								</td>
+								<td>
+									Call in to confirm
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-md-6">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>
+									#
+								</th>
+								<th>
+									Product
+								</th>
+								<th>
+									Payment Taken
+								</th>
+								<th>
+									Status
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									1
+								</td>
+								<td>
+									TB - Monthly
+								</td>
+								<td>
+									01/04/2012
+								</td>
+								<td>
+									Default
+								</td>
+							</tr>
+							<tr class="active">
+								<td>
+									1
+								</td>
+								<td>
+									TB - Monthly
+								</td>
+								<td>
+									01/04/2012
+								</td>
+								<td>
+									Approved
+								</td>
+							</tr>
+							<tr class="success">
+								<td>
+									2
+								</td>
+								<td>
+									TB - Monthly
+								</td>
+								<td>
+									02/04/2012
+								</td>
+								<td>
+									Declined
+								</td>
+							</tr>
+							<tr class="warning">
+								<td>
+									3
+								</td>
+								<td>
+									TB - Monthly
+								</td>
+								<td>
+									03/04/2012
+								</td>
+								<td>
+									Pending
+								</td>
+							</tr>
+							<tr class="danger">
+								<td>
+									4
+								</td>
+								<td>
+									TB - Monthly
+								</td>
+								<td>
+									04/04/2012
+								</td>
+								<td>
+									Call in to confirm
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+  </body>
+</html>

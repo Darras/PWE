@@ -39,6 +39,7 @@ public class LivroDAO {
         
         while(result.next()){
             livro = new Livro();
+            livro.setId(result.getInt("idlivro"));
             livro.setTitulo(result.getString("titulo"));
             livro.setAutor(result.getString("autor"));
             livro.setGenero(result.getString("genero"));
@@ -52,6 +53,33 @@ public class LivroDAO {
      }
      return Livros;
     }
+    
+    public Livro buscaPorId(int id_livro) throws SQLException {  
+        
+     Livro livro = null;
+
+        try{
+            con = Conexao.getConexaoMySQL();
+            String sql = "SELECT * FROM Livro WHERE idlivro = ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, id_livro);
+         
+            ResultSet result = stmt.executeQuery();
+            while(result.next()){
+                livro = new Livro();
+                livro.setId(result.getInt("idlivro"));
+                livro.setTitulo(result.getString("titulo"));
+                livro.setAutor(result.getString("autor"));
+                livro.setGenero(result.getString("genero"));
+            }
+            stmt.close();
+            con.close();
+        }catch(SQLException ex){
+            return null;
+        }
+        return livro;
+    }
+    
     public Collection<Livro> buscaTodosOsLivros() throws SQLException {     
      List<Livro> Livros = new ArrayList<>();
      
@@ -77,9 +105,11 @@ public class LivroDAO {
      }
      return Livros;
     }
+    
     public boolean InsereLivro(Livro livro){
         try{
-            String sql = "INSERT INTO livro VALUES(?,?,?)";
+            con = Conexao.getConexaoMySQL();
+            String sql = "INSERT INTO livro(titulo,autor,genero) VALUES(?,?,?)";
             stmt = con.prepareStatement(sql);
             stmt.setString(1, livro.getTitulo());
             stmt.setString(2, livro.getAutor());

@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package br.com.ServletController;
 
 import br.com.JavaBeans.Livro;
@@ -11,22 +16,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class Login implements Tarefa {
+/**
+ *
+ * @author Gabriel
+ */
+public class BuscarUsuario implements Tarefa {
     public String retorno = "";
     
     @Override
     public String executa(HttpServletRequest req, HttpServletResponse resp) throws SQLException{
         try{
-        Usuario usuario = new UsuarioDAO().buscaPorEmaileSenha(req.getParameter("email"), req.getParameter("senha"));
-        Collection<Livro> livros = new LivroDAO().buscaTodosOsLivros();
-        
-            if(usuario==null) {
+            System.out.println(req.getParameter("param"));
+            List<Usuario> usuarios = new UsuarioDAO().BuscarUsuario(req.getParameter("param"));
+            if(usuarios==null) {
                 retorno = "naoEncontrado.jsp";
-            } else {
-                HttpSession session = req.getSession();
-                session.setAttribute("usuarioLogado", usuario);
-                req.setAttribute("livros", livros);
-                retorno =  "/WEB-INF/paginas/Main.jsp";
+            } else {   
+                req.setAttribute("usuarios", usuarios);
+                retorno =  "/WEB-INF/paginas/ListarUsuarios.jsp";
             }
         }catch(SQLException ex){
             System.out.println(ex);

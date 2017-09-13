@@ -13,43 +13,74 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Giovani
  */
 public class UsuarioDAO {
+
     Connection con;
     Usuario user = null;
     PreparedStatement stmt = null;
-    
-    public Usuario buscaPorEmaileSenha(String email, String senha) throws SQLException {     
-     try{
-         con = Conexao.getConexaoMySQL();
+    List<Usuario> usuarios = null;
+
+    public Usuario buscaPorEmaileSenha(String email, String senha) throws SQLException {
+        try {
+            con = Conexao.getConexaoMySQL();
             String sql = "SELECT * FROM USUARIO WHERE email = ? and senha = ?";
-         stmt = con.prepareStatement(sql);
-         stmt.setString(1, email);
-         stmt.setString(2, senha);
-         System.out.println(stmt.toString());
-         ResultSet result = stmt.executeQuery();
-        
-        while(result.next()){
-            user = new Usuario();
-            user.setId(result.getInt("id"));
-            user.setEmail(result.getString("email"));
-            user.setSenha(result.getString("senha"));
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, email);
+            stmt.setString(2, senha);
+            System.out.println(stmt.toString());
+            ResultSet result = stmt.executeQuery();
+
+            while (result.next()) {
+                user = new Usuario();
+                user.setId(result.getInt("id"));
+                user.setEmail(result.getString("email"));
+                user.setSenha(result.getString("senha"));
+            }
+            stmt.close();
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+            return null;
         }
-        stmt.close();
-        con.close();
-     }catch(SQLException ex){
-         System.out.println(ex.toString());
-         return null;
-     }
-     return user;
+        return user;
     }
-    
-    public boolean InsereUsuario(Usuario user){
-        try{
+
+    public List<Usuario> BuscarUsuario(String param) throws SQLException {
+        usuarios = new ArrayList<>();
+        try {
+            con = Conexao.getConexaoMySQL();
+            String sql = "SELECT * FROM USUARIO WHERE nome like ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, "%"+param+"%");
+            System.out.println(stmt.toString());
+            ResultSet result = stmt.executeQuery();
+
+            while (result.next()) {
+                user = new Usuario();
+                user.setId(result.getInt("id"));
+                user.setEmail(result.getString("email"));
+                user.setNome(result.getString("nome"));
+
+                usuarios.add(user);
+            }
+            stmt.close();
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+            return null;
+        }
+        return usuarios;
+    }
+
+    public boolean InsereUsuario(Usuario user) {
+        try {
             con = Conexao.getConexaoMySQL();
             String sql = "INSERT INTO USUARIO(email,senha,nome) VALUES(?,?,?)";
             stmt = con.prepareStatement(sql);
@@ -58,16 +89,16 @@ public class UsuarioDAO {
             stmt.setString(3, user.getNome());
             int i;
             i = stmt.executeUpdate();
-            if(i>0){
+            if (i > 0) {
                 System.out.println("Usuario inserido");
-            }else{
+            } else {
                 System.out.println("falha ao inserir");
             }
             stmt.close();
             con.close();
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             return false;
-     }
-     return true;
+        }
+        return true;
     }
 }

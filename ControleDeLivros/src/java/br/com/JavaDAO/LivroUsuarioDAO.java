@@ -52,26 +52,28 @@ public class LivroUsuarioDAO {
      }
      return livros;
     }
-        public boolean InsereLivroUsuario(Usuario user,Livro livro){
+    
+    public boolean InsereLivroUsuario(Usuario user, int IdLivro, String Status){
         try{
             con = Conexao.getConexaoMySQL();
             String sql = "INSERT INTO Livro_USUARIO(IdUsuario,IdLivro,Status_leitura) VALUES(?,?,?)";
             stmt = con.prepareStatement(sql);
-            stmt.setString(1, user.getEmail());
-            stmt.setString(2, user.getSenha());
-            stmt.setString(3, user.getNome());
+            stmt.setInt(1, user.getId());
+            stmt.setInt(2, IdLivro);
+            stmt.setString(3, Status);
+            
             int i = stmt.executeUpdate();
             if(i>0){
-                System.out.println("Usuario inserido");
+                System.out.println("UsuarioLivro inserido");
             }else{
-                System.out.println("falha ao inserir");
+                System.out.println("falha ao inserir UsuarioLivro");
             }
             stmt.close();
             con.close();
         }catch(SQLException ex){
             return false;
-     }
-     return true;
+        }
+        return true;
     }
         
     public Collection<Livro> retornaLivrosWeb(Usuario usuario){
@@ -112,4 +114,5 @@ public class LivroUsuarioDAO {
         return ListaLivros;
     
     }
+    
 }
